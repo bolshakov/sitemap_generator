@@ -142,7 +142,7 @@ module SitemapGenerator
         images.delete_if { |key,value| key[:loc] == nil }
         images.each do |r|
           SitemapGenerator::Utilities.assert_valid_keys(r, :loc, :caption, :geo_location, :title, :license)
-          r[:loc] = URI.join(host, r[:loc]).to_s
+          r[:loc] = URI.join(host, r[:loc]).to_s rescue r[:loc]
         end
         images[0..(SitemapGenerator::MAX_SITEMAP_IMAGES-1)]
       end
